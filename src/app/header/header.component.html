@@ -1,0 +1,70 @@
+<!-- Navbar-->
+<nav class="navbar navbar-expand-lg navbar-light" style="background-color: #d10a30;">
+  <div class="container-fluid justify-content-between">
+    <!-- Left elements -->
+    <div class="d-flex">
+      <!-- Brand -->
+      <a class="navbar-brand" href="#" style="color:#ffffff">
+        <img src="../../assets/logo.png" width="45" height="45" class="d-inline-block align-top" alt="Logo twiddit">
+      </a>
+
+      <!-- Search form -->
+        <form class="input-group w-auto my-auto d-none d-sm-flex">
+          <input
+            autocomplete="off"
+            type="search"
+            placeholder="Search..."
+            id="search-bar"
+          />
+          <button type="submit" id="button-search">
+            <i class="bi bi-search" id="icons"></i>
+          </button>
+        </form>
+      
+    </div>
+    <!-- Left elements -->
+
+    <!-- Center elements -->
+    <ul class="navbar-nav flex-row d-none d-md-flex">
+      <li class="nav-item me-3 me-lg-1 active">
+        <a class="nav-link" href="#">
+          <span><i class="bi bi-house-door-fill" id="icons"></i></span>
+        </a>
+      </li>
+
+      <li class="nav-item me-3 me-lg-1">
+        <a class="nav-link" href="#">
+          <span><button id="add-twiddit"><i class="bi bi-plus-circle-fill" id="icon-red"></i> Twiddit</button></span>
+        </a>
+      </li>
+
+      
+    </ul>
+    <!-- Center elements -->
+
+    <!-- Right elements -->
+    <ul class="navbar-nav flex-row">
+      <li class="nav-item me-3 me-lg-1">
+        <a class="nav-link d-sm-flex align-items-sm-center" href="#">
+          <img
+            src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8dXNlcnxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80"
+            class="rounded-circle"
+            height="46"
+            alt="Black and White Portrait of a Man"
+            loading="lazy"
+          />
+          <span class="tab"></span>
+          <strong class="d-none d-sm-block ms-1" id="user-name">Username</strong>
+        </a>
+      </li>
+      <span class="tab"></span>
+      <li class="nav-item me-3 me-lg-1">
+        <a class="nav-link" href="#">
+          <span><button id="logout">Logout <i class="bi bi-door-closed-fill" id="icon-red"></i></button></span>
+        </a>
+      </li>
+    </ul>
+    <!-- Right elements -->
+  </div>
+</nav>
+<!-- Navbar -->

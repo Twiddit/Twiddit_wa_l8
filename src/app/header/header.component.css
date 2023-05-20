@@ -1,0 +1,54 @@
+#button-search{
+  background-color: #d10a30;
+  border: 0;
+  border-radius: 5px;
+  margin-left: 2px;
+}
+
+#search-bar{
+  min-width: 120px;
+  border: 0;
+  padding: 8px;
+  border-radius: 5px;
+}
+
+#add-twiddit{
+  background-color: #ffffff;
+  border: 0;
+  border-radius: 5px;
+  margin-left: 2px;
+  padding: 8px;
+  font-weight: bold;
+  color: #d10a30;
+}
+
+#icons{
+  font-size: 1.7rem;
+  color: #ffffff;
+}
+
+#icon-red{
+  font-size: 1.2rem;
+  color: #d10a30;
+}
+
+#logout{
+  background-color: #ffffff;
+  border: 0;
+  border-radius: 5px;
+  margin-left: 2px;
+  padding: 8px;
+  font-weight: bold;
+  color: #000000;
+}
+
+#user-name{
+  color: #ffffff;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.tab {
+  display: inline-block;
+  margin-left: 10px;
+}
