@@ -16,42 +16,11 @@ export class AuthenticationComponent {
   constructor(private apollo: Apollo) {}
  
   ngOnInit() {
-    // this.apollo
-    //   .watchQuery({
-    //     query: gql`
-    //     query Query {
-    //       allFilms {
-    //         films {
-    //           title
-    //           director
-    //           releaseDate
-    //           speciesConnection {
-    //             species {
-    //               name
-    //               classification
-    //               homeworld {
-    //                 name
-    //               }
-    //             }
-    //           }
-    //         }
-    //       }
-    //     }
-    //     `,
-    //   })
-    //   .valueChanges.subscribe((result: any) => {
-    //     this.rates = result.data?.rates;
-    //     this.loading = result.loading;
-    //     this.error = result.error;
-    //     console.log(result.data.allFilms.films)
-    //   });
-
 
     this.apollo
-    .query({
+    .watchQuery({
       query: gql`
-
-      query {
+      query Query {
         login(loginBody:{
             email: "alerodriguezmar@unal.edu.co",
             password: "12345"
@@ -66,12 +35,12 @@ export class AuthenticationComponent {
   
       `,
     })
-    .subscribe((result: any) => {
-      this.rates = result.data?.rates;
+    .valueChanges.subscribe((result: any) => {
+      this.rates = result.data
       this.loading = result.loading;
       this.error = result.error;
-      console.log(result)
+      console.log(this.rates)
     });
-  }
+   }
 
 }

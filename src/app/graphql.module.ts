@@ -3,10 +3,15 @@ import { HttpLink } from 'apollo-angular/http';
 import { NgModule } from '@angular/core';
 import { ApolloClientOptions, InMemoryCache } from '@apollo/client/core';
 
-const uri = 'http://localhost:5000/graphiql'; // <-- add the URL of the GraphQL server here
+
+
+
+
+//const uri = 'https://swapi-graphql.netlify.app/.netlify/functions/index';
+const uri = 'http://localhost:5000/graphql'; // <-- add the URL of the GraphQL server here
 export function createApollo(httpLink: HttpLink): ApolloClientOptions<any> {
   return {
-    link: httpLink.create({ uri ,method: 'GET',headers:}),
+    link: httpLink.create({ uri ,method: 'GET'}),
     cache: new InMemoryCache(),
   };
 }
