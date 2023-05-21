@@ -13,4 +13,9 @@ export class HeaderComponent {
   public open(modal: any): void {
     this.modalService.open(modal);
   }
+
+  logout(){
+    sessionStorage.clear()
+    location.reload();
+  }
 }
