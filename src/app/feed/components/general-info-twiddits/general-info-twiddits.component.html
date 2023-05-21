@@ -1,6 +1,22 @@
 <div *ngFor="let twiddit of twiddits">
   <div class="card w-25">
-    <h5 class="card-header bg-transparent" id="header">@{{twiddit.user}}</h5>
+    <div class="card-header bg-transparent">
+      <div class="row">
+        <div class="col-10">
+          <h5 id="header">@{{twiddit.user}}</h5>
+        </div>
+        <div class="col">
+          <a class="nav-link" type="button" data-bs-toggle="modal" data-bs-target="#retwiddit" (click)="retwiddit(twiddit.id, twiddits)">
+            <span><i class="bi bi-recycle" id="icons-header"></i></span>
+          </a>
+        </div>
+        <div class="col">
+          <a class="nav-link" href="/feed">
+            <span><i class="bi bi-info-circle" id="icons-header"></i></span>
+          </a>
+        </div>
+      </div>
+    </div>
     <div class="card-body">
       <!-- <h5 class="card-title">Card title</h5> -->
       <p class="card-text">{{twiddit.text}}</p>
@@ -32,5 +48,28 @@
       </div>
     </div>
     <img class="card-img-bottom" src="https://www.bizneo.com/blog/wp-content/uploads/2019/05/pruebas-psicometricas.webp" alt="Card image cap" height="300px" width="auto">
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="retwiddit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Retwiddit</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <textarea class="form-control" placeholder="Tell us..." id="twiddit-text"></textarea>
+          <label for="twiddit-text"></label>
+        </form>
+        <p>{{current | json}}</p>
+      </div>
+      <div class="modal-footer">
+        <input class="form-control" type="file" accept="video/*, image/*" id="formFileMultiple" multiple>
+        <button type="submit" class="btn btn-danger">Twiddit</button>
+      </div>
+    </div>
   </div>
 </div>

@@ -27,14 +27,14 @@
     <!-- Center elements -->
     <ul class="navbar-nav flex-row d-none d-md-flex">
       <li class="nav-item me-3 me-lg-1 active">
-        <a class="nav-link" href="#">
+        <a class="nav-link" href="/feed">
           <span><i class="bi bi-house-door-fill" id="icons"></i></span>
         </a>
       </li>
 
       <li class="nav-item me-3 me-lg-1">
-        <a class="nav-link" href="#">
-          <span><button id="add-twiddit"><i class="bi bi-plus-circle-fill" id="icon-red"></i> Twiddit</button></span>
+        <a class="nav-link">
+          <span><button id="add-twiddit" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="bi bi-plus-circle-fill" id="icon-red"></i> Twiddit</button></span>
         </a>
       </li>
 
@@ -68,3 +68,25 @@
   </div>
 </nav>
 <!-- Navbar -->
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">What are you thinking about?</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <textarea class="form-control" placeholder="Tell us..." id="twiddit-text"></textarea>
+          <label for="twiddit-text"></label>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <input class="form-control" type="file" accept="video/*, image/*" id="formFileMultiple" multiple>
+        <button type="submit" class="btn btn-danger">Twiddit</button>
+      </div>
+    </div>
+  </div>
+</div>

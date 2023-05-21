@@ -13,6 +13,7 @@ export class GeneralInfoTwidditsComponent {
   
   info: any;
   twiddits: any = [];
+  current: any;
   url: string = '/assets/infoFeed.json';
 
   ngOnInit() {
@@ -68,7 +69,16 @@ export class GeneralInfoTwidditsComponent {
         this.twiddits.unshift(temp);
       }
     }
-    console.log(this.twiddits)
+  }
+
+  retwiddit(id: string, twiddits: any){
+    console.log(twiddits)
+    for (let i = 0; i < twiddits.length; i++) {
+      if (twiddits[i].id === id){
+        this.current = Object.entries(twiddits[i]);
+      }
+    }
+    console.log(this.current)
   }
 
 }
