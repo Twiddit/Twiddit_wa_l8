@@ -1,5 +1,9 @@
 import { Apollo, gql } from 'apollo-angular';
+
+
 import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormBuilder } from '@angular/forms';
+import { AppComponent } from 'src/app/app.component';
 
 @Component({
   selector: 'app-authentication',
@@ -8,39 +12,70 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AuthenticationComponent {
 
-  rates: any[] | undefined;
+  rates: any | undefined;
   loading = true;
   error: any;
+  
+  form!: FormGroup;
 
 
-  constructor(private apollo: Apollo) {}
+
+  constructor(private apollo: Apollo,private  fb: FormBuilder,private appComponent: AppComponent) {
+    this.form = this.fb.group({
+      username: [],      
+      password: []
+    });
+
+  }
+
+  
  
   ngOnInit() {
 
-    this.apollo
-    .watchQuery({
-      query: gql`
-      query Query {
-        login(loginBody:{
-            email: "alerodriguezmar@unal.edu.co",
-            password: "12345"
-          }){
-            message
-            data{
-              accessToken
-            }
-        
+    
+
+  }
+
+
+  onSubmit() {
+    // TODO: Use EventEmitter with form value
+   let password = this.form.get(['password'])?.value;
+   let username = this.form.get(['username'])?.value;
+    this.login(username, password)
+    //location.reload();
+  }
+
+login(email:string,password:string){
+
+  //const email = "alerodriguezmar@unal.edu.co";
+ // const password = "12345";
+
+  this.apollo
+  .watchQuery({
+    query: gql`
+    query Query($email: String!, $password: String!) {
+      login(loginBody: { email: $email, password: $password }) {
+        message
+        data {
+          accessToken
         }
+      }
     }
+  `,
+  variables: {
+    email,
+    password
+  }
+  })
+  .valueChanges.subscribe((result: any) => {
   
-      `,
-    })
-    .valueChanges.subscribe((result: any) => {
-      this.rates = result.data
-      this.loading = result.loading;
-      this.error = result.error;
-      console.log(this.rates)
-    });
-   }
+    this.rates = result.data
+    this.loading = result.loading;
+    sessionStorage.setItem('token',this.rates.login.data.accessToken);
+    this.error = result.error;
+    this.appComponent.isLogin = true;
+    
+  });
+ }
 
 }
