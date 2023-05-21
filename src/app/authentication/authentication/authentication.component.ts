@@ -4,6 +4,7 @@ import { Apollo, gql } from 'apollo-angular';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { AppComponent } from 'src/app/app.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-authentication',
@@ -20,7 +21,7 @@ export class AuthenticationComponent {
 
 
 
-  constructor(private apollo: Apollo,private  fb: FormBuilder,private appComponent: AppComponent) {
+  constructor(private apollo: Apollo,private  fb: FormBuilder,private appComponent: AppComponent , private router: Router) {
     this.form = this.fb.group({
       username: [],      
       password: []
@@ -41,7 +42,9 @@ export class AuthenticationComponent {
     // TODO: Use EventEmitter with form value
    let password = this.form.get(['password'])?.value;
    let username = this.form.get(['username'])?.value;
-    this.login(username, password)
+
+   console.log(password+username)
+    this.login(username,password)
     //location.reload();
   }
 
@@ -71,9 +74,12 @@ login(email:string,password:string){
   
     this.rates = result.data
     this.loading = result.loading;
-    sessionStorage.setItem('token',this.rates.login.data.accessToken);
+  sessionStorage.setItem('token',this.rates.login.data.accessToken);
     this.error = result.error;
     this.appComponent.isLogin = true;
+    if(this.rates.login.data.accessToken != null){
+      this.router.navigate(['feed'])
+    }
     
   });
  }

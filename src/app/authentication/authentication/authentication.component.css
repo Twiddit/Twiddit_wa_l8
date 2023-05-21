@@ -1,9 +1,12 @@
 .box-login {
+  
     width: 30vw;
     height: 70vh;
-    background: rgba(0, 0, 0, 0.2);  
+    display: grid;
+    grid-template:  1fr 1fr 1fr 1fr/ 20% 20% 20%  20% 20% ;
+    background: #d10a30;  
     border-radius: 30px;
-    opacity: 0.7;
+    margin-top: 10vh;
   }
 
 .login{
@@ -13,12 +16,7 @@
   margin: 0 auto;
 }
 
-.text{
-    padding: 1vh;
-    text-align: center;
-}
-
-.form {
-    display: inline-block;
-
+.input{
+  margin: 10%;
+  grid-column: 2 / 5;
 }
