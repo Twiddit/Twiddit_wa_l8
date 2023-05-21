@@ -1,0 +1,36 @@
+<div *ngFor="let twiddit of twiddits">
+  <div class="card w-25">
+    <h5 class="card-header bg-transparent" id="header">@{{twiddit.user}}</h5>
+    <div class="card-body">
+      <!-- <h5 class="card-title">Card title</h5> -->
+      <p class="card-text">{{twiddit.text}}</p>
+      <p class="card-text"><small class="text-muted">{{twiddit.creationDate}}</small></p>
+    </div>
+    <div class="card-footer bg-transparent" id="footer">
+      <div class="row">
+        <div class="col-sm center-block text-center">
+          <p id="number">{{twiddit.number_of_replies}}</p>
+          <button type="button" class="btn btn-warning"
+            data-bs-toggle="button">
+            <i class="bi bi-chat-fill" id="icons"></i> Replies
+          </button>
+        </div>
+        <div class="col-sm center-block text-center">
+          <p id="number">{{twiddit.number_of_likes}}</p>
+          <button type="button" class="btn btn-info"
+            data-bs-toggle="button">
+            <i class="bi bi-star-fill" id="icons"></i> Likes
+          </button>
+        </div>
+        <div class="col-sm center-block text-center">
+          <p id="number">{{twiddit.number_of_dislikes}}</p>
+          <button type="button" class="btn btn-danger"
+            data-bs-toggle="button">
+            <i class="bi bi-trash-fill" id="icons"></i> Dislikes
+          </button>
+        </div>
+      </div>
+    </div>
+    <img class="card-img-bottom" src="https://www.bizneo.com/blog/wp-content/uploads/2019/05/pruebas-psicometricas.webp" alt="Card image cap" height="300px" width="auto">
+  </div>
+</div>

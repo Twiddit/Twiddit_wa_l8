@@ -7,20 +7,22 @@ import { AppComponent } from './app.component';
 import { GraphQLModule } from './graphql.module';
 import { HttpClientModule } from '@angular/common/http';
 import { AuthenticationComponent } from './authentication/authentication/authentication.component';
-import { HeaderComponent } from './header/header.component';
+import { HeaderModule } from './header/header.module';
+import { FeedModule } from './feed/feed.module';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    AuthenticationComponent,
-    HeaderComponent
+    AuthenticationComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     GraphQLModule,
     HttpClientModule,
+    HeaderModule,
+    FeedModule,
     NgbModule
   ],
   providers: [],
