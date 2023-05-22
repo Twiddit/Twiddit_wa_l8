@@ -11,7 +11,7 @@ import { ApolloClientOptions, InMemoryCache } from '@apollo/client/core';
 const uri = 'http://localhost:5000/graphql'; // <-- add the URL of the GraphQL server here
 export function createApollo(httpLink: HttpLink): ApolloClientOptions<any> {
   return {
-    link: httpLink.create({ uri ,method: 'GET'}),
+    link: httpLink.create({ uri }),
     cache: new InMemoryCache(),
   };
 }
