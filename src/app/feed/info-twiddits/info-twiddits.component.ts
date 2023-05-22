@@ -13,6 +13,7 @@ export class InfoTwidditsComponent {
 
   id: any /* = '64227017f68242e3c447d88d' */;
   username: any;
+  temp: any;
   /* info = {
     "twiddit": {
       "_id": "64227017f68242e3c447d88d",
@@ -203,6 +204,88 @@ export class InfoTwidditsComponent {
       },
     );
     window.location.reload()
+  }
+
+  createLike(twiddit_id: string){
+    var userId = sessionStorage.getItem('userId');
+    var date = new Date().toISOString();;
+    this.apollo.mutate({
+      mutation: gql`
+      mutation CreateLike($twiddit_id: String!, $userId: Int!, $date: String!){
+        createLike(like: {
+          userId: $userId,
+          twidditId: $twiddit_id,
+          creationDate: $date
+        }){
+          _id
+        }
+      }
+      `,
+      variables: {
+        twiddit_id,
+        userId,
+        date
+      }
+    }).subscribe(
+      ({ data }) => {
+        console.log('got data', data);
+      },
+      error => {
+        console.log('there was an error sending the query', error);
+      },
+    );
+    window.location.reload()
+  }
+
+  createDislike(twiddit_id: string){
+    var userId = sessionStorage.getItem('userId');
+    var date = new Date().toISOString();;
+    this.apollo.mutate({
+      mutation: gql`
+      mutation CreateDislike($twiddit_id: String!, $userId: Int!, $date: String!){
+        createDislike(dislike: {
+          userId: $userId,
+          twidditId: $twiddit_id,
+          creationDate: $date
+        }){
+          _id
+        }
+      }
+      `,
+      variables: {
+        twiddit_id,
+        userId,
+        date
+      }
+    }).subscribe(
+      ({ data }) => {
+        console.log('got data', data);
+      },
+      error => {
+        console.log('there was an error sending the query', error);
+      },
+    );
+    window.location.reload()
+  }
+
+  name(userId: any){
+    this.apollo.watchQuery({
+      query: gql`
+      query Query($userId: Int!){
+        viewProfile(id: $userId){
+            username
+        }
+    }
+    `,
+    variables: {
+      userId
+    }
+    }).valueChanges.subscribe((result: any) => {
+      this.rates = result.data
+      this.loading = result.loading;
+      this.temp = this.rates.viewProfile.username;
+      this.error = result.error;
+    });
   }
 
   /*ngOnInit(){

@@ -25,14 +25,14 @@
       <div class="col-sm center-block text-center">
         <p id="number">{{info.number_of_likes}}</p>
         <button type="button" class="btn btn-info"
-          data-bs-toggle="button">
+          data-bs-toggle="button" (click)="createLike(info.twiddit._id)" title="Create Like!">
           <i class="bi bi-star-fill" id="icons"></i> Likes
         </button>
       </div>
       <div class="col-sm center-block text-center">
         <p id="number">{{info.number_of_dislikes}}</p>
         <button type="button" class="btn btn-danger"
-          data-bs-toggle="button">
+          data-bs-toggle="button" (click)="createDislike(info.twiddit._id)" title="Create Dislike!">
           <i class="bi bi-trash-fill" id="icons"></i> Dislikes
         </button>
       </div>
@@ -53,11 +53,12 @@
     </div>
   </div>
   <div *ngFor="let reply of info.replies">
+    <!-- {{name(reply.userId)}} -->
     <div class="card w-75 border-dark">
       <div class="card-header bg-transparent">
         <div class="row">
           <div class="col-10">
-            <h3 id="header">@</h3>
+            <h5 id="header">Reply:<!-- {{temp}} --></h5>
           </div>
           <div class="col">
             <button class="btn btn-danger" type="button" title="Delete Reply!" (click)="deleteReply(reply._id)">
@@ -80,7 +81,7 @@
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="createReply">What are you thinking about this twiddit?</h1>
+        <h1 class="modal-title fs-5" id="createReply">Wanna reply?</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body" novalidate>

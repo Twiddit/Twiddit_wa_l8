@@ -10,12 +10,12 @@
           <h5 id="header">@{{twiddit.user}}</h5>
         </div>
         <div class="col">
-          <a class="nav-link" type="button" data-bs-toggle="modal" data-bs-target="#retwiddit" (click)="retwiddit(twiddit.id, twiddits)">
+          <a class="nav-link" type="button" data-bs-toggle="modal" data-bs-target="#retwiddit" (click)="retwiddit(twiddit.id, twiddits)" title="Retwiddiar!">
             <span><i class="bi bi-recycle" id="icons-header"></i></span>
           </a>
         </div>
         <div class="col">
-          <button class="nav-link" (click)="goInfoTwiddit(twiddit.id, twiddit.user)">
+          <button class="nav-link" (click)="goInfoTwiddit(twiddit.id, twiddit.user)" title="View Twiddit!">
             <span><i class="bi bi-info-circle" id="icons-header"></i></span>
           </button>
         </div>
@@ -30,21 +30,21 @@
       <div class="row">
         <div class="col-sm center-block text-center">
           <p id="number">{{twiddit.number_of_replies}}</p>
-          <button class="btn btn-warning" type="button">
+          <button class="btn btn-warning" type="button" (click)="goInfoTwiddit(twiddit.id, twiddit.user)" title="View Replies!">
             <i class="bi bi-chat-fill" id="icons"></i> Replies
           </button>
         </div>
         <div class="col-sm center-block text-center">
           <p id="number">{{twiddit.number_of_likes}}</p>
           <button type="button" class="btn btn-info"
-            data-bs-toggle="button">
+            data-bs-toggle="button" (click)="createLike(twiddit.id)" title="Create Like!">
             <i class="bi bi-star-fill" id="icons"></i> Likes
           </button>
         </div>
         <div class="col-sm center-block text-center">
           <p id="number">{{twiddit.number_of_dislikes}}</p>
           <button type="button" class="btn btn-danger"
-            data-bs-toggle="button">
+            data-bs-toggle="button" (click)="createDislike(twiddit.id)" title="Create Dislike!">
             <i class="bi bi-trash-fill" id="icons"></i> Dislikes
           </button>
         </div>

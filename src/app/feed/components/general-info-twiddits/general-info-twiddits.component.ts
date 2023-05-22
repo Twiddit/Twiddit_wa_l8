@@ -130,6 +130,68 @@ export class GeneralInfoTwidditsComponent {
     //console.log(this.current)
   }
 
+  createLike(twiddit_id: string){
+    var userId = sessionStorage.getItem('userId');
+    var date = new Date().toISOString();;
+    this.apollo.mutate({
+      mutation: gql`
+      mutation CreateLike($twiddit_id: String!, $userId: Int!, $date: String!){
+        createLike(like: {
+          userId: $userId,
+          twidditId: $twiddit_id,
+          creationDate: $date
+        }){
+          _id
+        }
+      }
+      `,
+      variables: {
+        twiddit_id,
+        userId,
+        date
+      }
+    }).subscribe(
+      ({ data }) => {
+        console.log('got data', data);
+      },
+      error => {
+        console.log('there was an error sending the query', error);
+      },
+    );
+    window.location.reload()
+  }
+
+  createDislike(twiddit_id: string){
+    var userId = sessionStorage.getItem('userId');
+    var date = new Date().toISOString();;
+    this.apollo.mutate({
+      mutation: gql`
+      mutation CreateDislike($twiddit_id: String!, $userId: Int!, $date: String!){
+        createDislike(dislike: {
+          userId: $userId,
+          twidditId: $twiddit_id,
+          creationDate: $date
+        }){
+          _id
+        }
+      }
+      `,
+      variables: {
+        twiddit_id,
+        userId,
+        date
+      }
+    }).subscribe(
+      ({ data }) => {
+        console.log('got data', data);
+      },
+      error => {
+        console.log('there was an error sending the query', error);
+      },
+    );
+    window.location.reload()
+  }
+
   goInfoTwiddit(twiddit_id: any, userName:any) {
     console.log(twiddit_id)
     this.router.navigateByUrl('feed/info-twiddit', { state: { id: twiddit_id, username: userName } });
