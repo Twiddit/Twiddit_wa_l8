@@ -1,36 +1,37 @@
+<div class="container">
 
 
-<div class="login">
-    <div class="box-login">
 
-        <form [formGroup]="form" (ngSubmit)="onSubmit()">
-            <input type="text" [formControlName]="'username'"/>
-            <input type="password" [formControlName]="'password'"/>
-         
-            <button type="submit">Submit</button>
-          </form>
+    <div class="login">
 
-        <!-- <div>
-            <h3 class="text">Login</h3>
+      
+
+        <div>
+            <!-- <div>
+                <img src="../../assets/logo2.png" style="position: fixed; margin-top: 4vh;" width="100px" height="100px">
+            </div> -->
+            <form [formGroup]="form" class="box-login" (ngSubmit)="onSubmit()">
+                
+
+                <div class=" input">
+                    <label>
+                        Usuario:
+                    </label>
+                    <input type="text" style="width: 100%;" class="form-control" [formControlName]="'username'">
+                </div>
+
+                <div class="input">
+                    <label>
+                        Contraseña:
+                    </label>
+                    <input type="password" style="width: 100%;" class="form-control" [formControlName]="'password'" />
+                </div>
+                <div class="input">
+                    <button style="width: 100%;" class="form-control" type="submit">Ingresar</button>
+                </div>
+            </form>
+
         </div>
-        <div class="form">
-            <div >
-                <label>
-                    Usuario
-                </label>
-                <input type="text" class="input">
-              
-            </div>
-            <div>
-                <label>
-                    contrasena
-                </label>
-                <input type="password">
-              
-            </div>
-        </div> -->
- 
-    
     </div>
-</div>
 
+</div>
