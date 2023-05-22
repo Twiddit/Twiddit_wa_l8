@@ -80,7 +80,6 @@ login(email:string,password:string){
     if(this.rates.login.data.accessToken != null){
       this.router.navigate(['feed'])
     }
-    
   });
  }
 
