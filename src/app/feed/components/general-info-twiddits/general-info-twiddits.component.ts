@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Apollo, gql } from 'apollo-angular';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -10,9 +11,9 @@ import { Apollo, gql } from 'apollo-angular';
 })
 export class GeneralInfoTwidditsComponent {
 
-  constructor(private http: HttpClient, private apollo: Apollo) {
+  constructor(private http: HttpClient, private apollo: Apollo, public router: Router) {
   }
-  
+
   info: any;
   twiddits: any = [];
   current: any;
@@ -22,21 +23,40 @@ export class GeneralInfoTwidditsComponent {
   url: string = '/assets/infoFeed.json';
 
   ngOnInit() {
-    this.http.get(this.url).subscribe(res => {
-      this.getInfo(res)
-    });
+
     var userId = sessionStorage.getItem('userId');
+
+    /* this.http.get(this.url).subscribe(res => {
+      this.getInfo(res)
+    }); */
 
     this.apollo.watchQuery({
       query: gql`
       query Query($userId: Int!){
-        viewProfile(id: $userId){
-            email,
-            birthday,
-            phone,
-            profile_photo,
-            description,
-            username
+        userFeed(userId: $userId){
+          user{
+            username 
+          }
+          twiddit {
+            twiddit {
+              _id
+              userId
+              communidditsId
+              retwidditId
+              text
+              creationDate
+              imageURL1
+              imageURL2
+              imageURL3
+              imageURL4
+              videoURL
+              tags
+            }
+            number_of_replies
+            number_of_likes
+            number_of_dislikes
+            isRetwiddit
+          }
         }
     }
     `,
@@ -46,13 +66,13 @@ export class GeneralInfoTwidditsComponent {
   }).valueChanges.subscribe((result: any) => {
     this.rates = result.data
     this.loading = result.loading;
-    console.log(this.rates)
+    this.getInfo(this.rates)
     this.error = result.error;
   });
   }
 
   getInfo(data: any) {
-    this.info = data.data.userFeed;
+    this.info = data.userFeed;
     this.getTwiddits();
   }
 
@@ -101,13 +121,18 @@ export class GeneralInfoTwidditsComponent {
   }
 
   retwiddit(id: string, twiddits: any){
-    console.log(twiddits)
+    console.log(id)
     for (let i = 0; i < twiddits.length; i++) {
       if (twiddits[i].id === id){
         this.current = Object.entries(twiddits[i]);
       }
     }
-    console.log(this.current)
+    //console.log(this.current)
+  }
+
+  goInfoTwiddit(twiddit_id: any, userName:any) {
+    console.log(twiddit_id)
+    this.router.navigateByUrl('feed/info-twiddit', { state: { id: twiddit_id, username: userName } });
   }
 
 }

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Apollo, gql } from 'apollo-angular';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -23,7 +24,7 @@ export class HeaderComponent {
 
   form!: FormGroup;
 
-  constructor(private modalService: NgbModal, private apollo: Apollo, private formBuilder: FormBuilder,) {
+  constructor(private modalService: NgbModal, private apollo: Apollo, private formBuilder: FormBuilder, public router: Router) {
   }
 
   ngOnInit() {
@@ -98,6 +99,7 @@ export class HeaderComponent {
         console.log('there was an error sending the query', error);
       },
     );
+    this.router.navigateByUrl('feed');
   }
 
   logout(){

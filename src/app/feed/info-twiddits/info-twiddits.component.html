@@ -1,0 +1,106 @@
+<app-header></app-header>
+<div class="card w-25">
+  <div class="card-header bg-transparent">
+    <div class="row">
+      <div class="col-11">
+        <h5 id="header">@{{username}}</h5>
+      </div>
+      <div class="col">
+      </div>
+    </div>
+  </div>
+  <div class="card-body">
+    <!-- <h5 class="card-title">Card title</h5> -->
+    <p class="card-text">{{info.twiddit.text}}</p>
+    <p class="card-text"><small class="text-muted">{{info.twiddit.creationDate.split("T")[0]}}</small></p>
+  </div>
+  <div class="card-footer" id="footer">
+    <div class="row">
+      <div class="col-sm center-block text-center">
+        <p id="number">{{info.number_of_replies}}</p>
+        <button class="btn btn-warning" type="button" disabled="true">
+          <i class="bi bi-chat-fill" id="icons"></i> Replies
+        </button>
+      </div>
+      <div class="col-sm center-block text-center">
+        <p id="number">{{info.number_of_likes}}</p>
+        <button type="button" class="btn btn-info"
+          data-bs-toggle="button">
+          <i class="bi bi-star-fill" id="icons"></i> Likes
+        </button>
+      </div>
+      <div class="col-sm center-block text-center">
+        <p id="number">{{info.number_of_dislikes}}</p>
+        <button type="button" class="btn btn-danger"
+          data-bs-toggle="button">
+          <i class="bi bi-trash-fill" id="icons"></i> Dislikes
+        </button>
+      </div>
+    </div>
+  </div>
+  <!-- <img class="card-img-bottom" src="https://www.bizneo.com/blog/wp-content/uploads/2019/05/pruebas-psicometricas.webp" alt="Card image cap" height="300px" width="auto"> -->
+  <div class="card-body">
+    <!-- <h5 class="card-title">Card title</h5> -->
+    <div class="row">
+      <div class="col-8">
+        <h3 id="header">Replies:</h3>
+      </div>
+      <div class="col-sm text-center">
+        <button class="btn btn-warning" type="button" data-bs-toggle="modal" data-bs-target="#createReply">
+          <i class="bi bi-plus-circle-fill" id="icons"></i> Create reply
+        </button>
+      </div>
+    </div>
+  </div>
+  <div *ngFor="let reply of info.replies">
+    <div class="card w-75 border-dark">
+      <div class="card-header bg-transparent">
+        <div class="row">
+          <div class="col-10">
+            <h3 id="header">@</h3>
+          </div>
+          <div class="col">
+            <button class="btn btn-danger" type="button" title="Delete Reply!" (click)="deleteReply(reply._id)">
+              <i class="bi bi-trash2-fill" id="icons"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="card-body">
+        <!-- <h5 class="card-title">Card title</h5> -->
+        <p class="card-text">{{reply.text}}</p>
+        <p class="card-text"><small class="text-muted">{{reply.creationDate.split("T")[0]}}</small></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="createReply" tabindex="-1" aria-labelledby="createReply" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="createReply">What are you thinking about this twiddit?</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body" novalidate>
+        <form [formGroup]="checkoutForm" (ngSubmit)="onSubmit()">
+          <input type="number" type="hidden" id="postId" name="postId" formControlName="userId" value="34657">
+          <textarea class="form-control" rows="3" placeholder="Tell us..." id="twiddit-text" formControlName="reply_text"></textarea>
+          <label for="twiddit-text"></label>
+          <div *ngIf="checkoutForm.controls['reply_text'].invalid && (checkoutForm.controls['reply_text'].dirty || checkoutForm.controls['reply_text'].touched)" class="alert alert-warning">
+            <div *ngIf="checkoutForm.controls['reply_text'].errors?.['required']">
+              Text is empty.
+            </div>
+        </div>
+          <br>
+          <button type="submit" [disabled]="checkoutForm.pristine || checkoutForm.invalid" class="btn btn-warning" data-bs-dismiss="modal">Reply</button>
+        </form>
+      </div>
+      <!-- <div class="modal-footer">
+        <input class="form-control" type="file" accept="video/*, image/*" id="formFileMultiple" multiple>
+      </div> -->
+    </div>
+  </div>
+</div>
+

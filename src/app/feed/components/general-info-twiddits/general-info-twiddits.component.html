@@ -1,3 +1,7 @@
+<div *ngIf="loading" class="cssload-container">
+  <div class="cssload-speeding-wheel"></div>
+</div>
+
 <div *ngFor="let twiddit of twiddits">
   <div class="card w-25">
     <div class="card-header bg-transparent">
@@ -11,9 +15,9 @@
           </a>
         </div>
         <div class="col">
-          <a class="nav-link" href="/feed">
+          <button class="nav-link" (click)="goInfoTwiddit(twiddit.id, twiddit.user)">
             <span><i class="bi bi-info-circle" id="icons-header"></i></span>
-          </a>
+          </button>
         </div>
       </div>
     </div>
@@ -26,8 +30,7 @@
       <div class="row">
         <div class="col-sm center-block text-center">
           <p id="number">{{twiddit.number_of_replies}}</p>
-          <button type="button" class="btn btn-warning"
-            data-bs-toggle="button">
+          <button class="btn btn-warning" type="button">
             <i class="bi bi-chat-fill" id="icons"></i> Replies
           </button>
         </div>
