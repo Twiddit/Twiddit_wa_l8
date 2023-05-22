@@ -60,6 +60,7 @@ login(email:string,password:string){
       login(loginBody: { email: $email, password: $password }) {
         message
         data {
+          userId,
           accessToken
         }
       }
@@ -74,7 +75,8 @@ login(email:string,password:string){
   
     this.rates = result.data
     this.loading = result.loading;
-  sessionStorage.setItem('token',this.rates.login.data.accessToken);
+    sessionStorage.setItem('userId',this.rates.login.data.userId);
+    sessionStorage.setItem('token',this.rates.login.data.accessToken);
     this.error = result.error;
     this.appComponent.isLogin = true;
     if(this.rates.login.data.accessToken != null){

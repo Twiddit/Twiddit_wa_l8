@@ -2,6 +2,9 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { HeaderComponent } from './header.component';
+import { GraphQLModule } from '../graphql.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
 
 @NgModule({
   declarations: [
@@ -9,6 +12,9 @@ import { HeaderComponent } from './header.component';
   ],
   imports: [
     CommonModule,
+    GraphQLModule,
+    ReactiveFormsModule,
+    FormsModule
   ],
   exports: [
     HeaderComponent

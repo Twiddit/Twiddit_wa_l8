@@ -45,16 +45,10 @@
     <!-- Right elements -->
     <ul class="navbar-nav flex-row">
       <li class="nav-item me-3 me-lg-1">
-        <a class="nav-link d-sm-flex align-items-sm-center" href="#">
-          <img
-            src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8dXNlcnxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80"
-            class="rounded-circle"
-            height="46"
-            alt="Black and White Portrait of a Man"
-            loading="lazy"
-          />
+        <a class="nav-link d-sm-flex align-items-sm-center">
+          <i class="bi bi-file-person-fill" id="icons"></i>
           <span class="tab"></span>
-          <strong class="d-none d-sm-block ms-1" id="user-name">Username</strong>
+          <strong class="d-none d-sm-block ms-1" id="user-name">{{username}}</strong>
         </a>
       </li>
       <span class="tab"></span>
@@ -77,16 +71,23 @@
         <h1 class="modal-title fs-5" id="exampleModalLabel">What are you thinking about?</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <div class="modal-body">
-        <form>
-          <textarea class="form-control" placeholder="Tell us..." id="twiddit-text"></textarea>
+      <div class="modal-body" novalidate>
+        <form [formGroup]="checkoutForm" (ngSubmit)="onSubmit()">
+          <input type="number" type="hidden" id="postId" name="postId" formControlName="userId" value="34657">
+          <textarea class="form-control" rows="5" placeholder="Tell us..." id="twiddit-text" formControlName="twiddit_text"></textarea>
           <label for="twiddit-text"></label>
+          <div *ngIf="checkoutForm.controls['twiddit_text'].invalid && (checkoutForm.controls['twiddit_text'].dirty || checkoutForm.controls['twiddit_text'].touched)" class="alert alert-warning">
+            <div *ngIf="checkoutForm.controls['twiddit_text'].errors?.['required']">
+              Text is empty.
+            </div>
+        </div>
+          <br>
+          <button type="submit" [disabled]="checkoutForm.pristine || checkoutForm.invalid" class="btn btn-danger" data-bs-dismiss="modal">Twiddit</button>
         </form>
       </div>
-      <div class="modal-footer">
+      <!-- <div class="modal-footer">
         <input class="form-control" type="file" accept="video/*, image/*" id="formFileMultiple" multiple>
-        <button type="submit" class="btn btn-danger">Twiddit</button>
-      </div>
+      </div> -->
     </div>
   </div>
 </div>

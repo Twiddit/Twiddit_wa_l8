@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Apollo, gql } from 'apollo-angular';
+
 
 @Component({
   selector: 'app-general-info-twiddits',
@@ -8,18 +10,45 @@ import { HttpClient } from '@angular/common/http';
 })
 export class GeneralInfoTwidditsComponent {
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private apollo: Apollo) {
   }
   
   info: any;
   twiddits: any = [];
   current: any;
+  rates: any | undefined;
+  loading = true;
+  error: any;
   url: string = '/assets/infoFeed.json';
 
   ngOnInit() {
     this.http.get(this.url).subscribe(res => {
       this.getInfo(res)
     });
+    var userId = sessionStorage.getItem('userId');
+
+    this.apollo.watchQuery({
+      query: gql`
+      query Query($userId: Int!){
+        viewProfile(id: $userId){
+            email,
+            birthday,
+            phone,
+            profile_photo,
+            description,
+            username
+        }
+    }
+    `,
+  variables: {
+    userId
+  }
+  }).valueChanges.subscribe((result: any) => {
+    this.rates = result.data
+    this.loading = result.loading;
+    console.log(this.rates)
+    this.error = result.error;
+  });
   }
 
   getInfo(data: any) {
