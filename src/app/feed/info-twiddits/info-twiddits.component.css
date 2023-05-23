@@ -1,0 +1,25 @@
+.card{
+  border-color: #d10a30;
+  margin: 0 auto; /* Added */
+  float: none; /* Added */
+  margin-bottom: 10px; /* Added */
+  margin-top: 10px; /* Added */
+}
+
+#header{
+  border-color: #d10a30;
+}
+
+#footer{
+  border-color: #d10a30;
+}
+
+#number {
+  display: inline;
+  margin-right: 1rem;
+}
+
+#icons-header{
+  font-size: 1.3rem;
+  color: #d10a30;
+}

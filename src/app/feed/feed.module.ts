@@ -5,6 +5,7 @@ import { HeaderModule } from '../header/header.module';
 import { GeneralInfoTwidditsModule } from './components/general-info-twiddits/general-info-twiddits.module';
 import { FeedComponent } from './feed.component';
 import { AuthenticationComponent } from '../authentication/authentication/authentication.component';
+import { InfoTwidditsModule } from './info-twiddits/info-twiddits.module';
 
 
 
@@ -15,7 +16,8 @@ import { AuthenticationComponent } from '../authentication/authentication/authen
   imports: [
     CommonModule,
     HeaderModule,
-    GeneralInfoTwidditsModule
+    GeneralInfoTwidditsModule,
+    InfoTwidditsModule
   ],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ] ,
   exports: [
