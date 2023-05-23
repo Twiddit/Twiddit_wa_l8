@@ -1,17 +1,7 @@
 <div class="container">
-
-
-
     <div class="login">
-
-      
-
         <div>
-            <!-- <div>
-                <img src="../../assets/logo2.png" style="position: fixed; margin-top: 4vh;" width="100px" height="100px">
-            </div> -->
             <form [formGroup]="form" class="box-login" (ngSubmit)="onSubmit()">
-                
 
                 <div class=" input">
                     <label>
@@ -19,7 +9,6 @@
                     </label>
                     <input type="text" style="width: 100%;" class="form-control" [formControlName]="'username'">
                 </div>
-
                 <div class="input">
                     <label>
                         Contraseña:
@@ -30,13 +19,68 @@
                     <button style="width: 100%;" class="form-control" type="submit">Ingresar</button>
                 </div>
                 <div class="input">
-                    <button type="button" class="form-control" >Registrarse</button>
+                    <button type="button"  class="nav-link" data-bs-toggle="modal" data-bs-target="#retwiddit" class="form-control" >Registrarse</button>
                 </div>
-    
-              
             </form>
-           
         </div>
     </div>
-
 </div>
+
+
+<div class="modal fade" id="retwiddit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    
+
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Registrarse</h1>
+          
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+           
+           
+
+        <form [formGroup]="register" (ngSubmit)="onSubmitRegister()">
+
+            <div class="mb-3">
+                <label for="exampleFormControlInput1" class="form-label">Email:</label>
+                <input type="email" class="form-control"  [formControlName]="'email'" id="email" placeholder="name@example.com">
+              </div>
+
+              <label for="inputPassword5" class="form-label">Password:</label>
+              <input type="password"  [formControlName]="'password'"  id="password" class="form-control" aria-labelledby="passwordHelpBlock">
+              <div id="passwordHelpBlock" class="form-text">
+                Your password must be 8-20 characters long, contain letters and numbers, and must not contain spaces, special characters, or emoji.
+              </div>
+
+              <div class="mb-3">
+                <label for="exampleFormControlInput1"  class="form-label">Fecha Nacimiento:</label>
+                <input type="date" class="form-control"   [formControlName]="'birthday'"  id="birthday" placeholder="dd/mm/yyyy">
+              </div>
+
+              <div class="mb-3">
+                <label for="exampleFormControlInput1" class="form-label">Telefono:</label>
+                <input type="text" class="form-control"  [formControlName]="'phone'" id="phone" placeholder="3112896536">
+              </div>
+
+              <div class="mb-3">
+                <label for="exampleFormControlInput1" class="form-label">Descripcion:</label>
+                <input type="text" class="form-control" [formControlName]="'description'" id="description" placeholder="">
+              </div>
+
+              <div class="mb-3">
+                <label for="exampleFormControlInput1" class="form-label">Nombre de usuario:</label>
+                <input type="text" class="form-control" [formControlName]="'username'" id="username" placeholder="alerodriguezmar">
+              </div>
+              <div class="modal-footer">
+           
+                <button type="submit" class="btn btn-danger">Registrase</button>
+              </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+ 
