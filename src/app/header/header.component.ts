@@ -3,6 +3,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Apollo, gql } from 'apollo-angular';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Twiddit } from '../models/register';
 
 @Component({
   selector: 'app-header',
@@ -12,10 +13,16 @@ import { Router } from '@angular/router';
 export class HeaderComponent {
 
   rates: any | undefined;
+
+  result: any | undefined;
   username: string = "";
   photo: string = "";
   loading = true;
   error: any;
+  twiddits:Twiddit[]= [];
+  usernameText:string = '';
+
+  textFind:string = ''
 
   checkoutForm = this.formBuilder.group({
     userId: "",
@@ -105,5 +112,75 @@ export class HeaderComponent {
   logout(){
     sessionStorage.clear()
     location.reload();
+  }
+
+
+
+  findTwidits(){
+
+    var text = this.textFind
+
+    this.apollo.watchQuery({
+      query: gql`
+      query Query($text: String!) {
+        searchTwiddit(text: $text) {
+       _id,
+              userId,
+              communidditsId,
+              retwidditId,
+              text,
+              creationDate,
+              imageURL1,
+              imageURL2,
+              imageURL3,
+              imageURL4,
+              videoURL,
+              tags,
+        }
+      }
+    `,
+    variables: {
+      text
+    }
+    }).valueChanges.subscribe((result: any) => {
+      this.result = result.data
+      this.twiddits = this.result.searchTwiddit
+      console.log(this.twiddits)
+    });
+
+    
+  }
+
+
+
+  goInfoTwiddit(twiddit_id: any, userName:any) {
+    console.log(twiddit_id)
+
+    this.router.navigateByUrl('feed/info-twiddit', { state: { id: twiddit_id, username: this.usernameText } });
+  }
+  
+
+  name(userId: any){
+    
+    
+    this.apollo.watchQuery({
+      query: gql`
+      query Query($userId: Int!){
+        viewProfile(id: $userId){
+            username
+        }
+    }
+    `,
+    variables: {
+      userId
+    }
+    }).valueChanges.subscribe((result: any) => {
+      this.rates = result.data
+      this.usernameText = this.rates.viewProfile.username;
+      console.log(this.usernameText)
+
+    });
+
+
   }
 }

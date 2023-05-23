@@ -6,7 +6,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AppComponent } from 'src/app/app.component';
 import { Router } from '@angular/router';
 import { register } from 'src/app/models/register';
-import { NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
+import { NgbAlertConfig, NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-authentication',
@@ -19,14 +19,21 @@ export class AuthenticationComponent {
   loading = true;
   error: any;
   registerUser!:register;
+
+  showAlert: boolean = false;
   
   form!: FormGroup;
 
   register!: FormGroup;
 
+  
 
 
-  constructor(private apollo: Apollo,private  fb: FormBuilder,private appComponent: AppComponent , private router: Router) {
+
+  constructor(private apollo: Apollo,private  fb: FormBuilder,private appComponent: AppComponent , private router: Router , private alertConfig: NgbAlertConfig) {
+
+    alertConfig.dismissible = true;
+
     this.form = this.fb.group({
       username: [],      
       password: []
@@ -125,20 +132,20 @@ login(email:string,password:string){
     }
   }
 `;
-const birthday = user.birthday
-const description = user.description
-const email = user.email
-const password = user.password
-const phone = user.phone
-const profilePhoto = user.profilePhoto
-const username = user.username
+var birthday = user.birthday
+var description = user.description
+var email = user.email
+var password = user.password
+var phone = user.phone
+var profilePhoto = user.profilePhoto
+var username = user.username
 console.log(user)
 
 console.log(username)
 
 this.apollo.mutate({
   mutation: gql`
-    mutation {
+    mutation Register($email: String!, $password: String!,$birthday: String!, $description: String!, $profilePhoto: String!, $username: String!) {
       register(registerBody: {
         birthday: $birthday,
         description: $description,
@@ -163,7 +170,9 @@ this.apollo.mutate({
   }
 }).subscribe(
   ({ data }) => {
+    this.showBootstrapAlert()
     console.log('got data', data);
+    
   },
   error => {
     console.log('there was an error sending the query', error);
@@ -199,5 +208,14 @@ castDate(date:string):string{
   return sdate[2]+'-'+sdate[1]+'-'+sdate[0];
 }
 
+
+
+showBootstrapAlert(): void {
+  this.showAlert = true;
+}
+
+hideBootstrapAlert(): void {
+  this.showAlert = false;
+}
 
 }

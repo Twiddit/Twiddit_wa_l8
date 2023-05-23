@@ -9,17 +9,21 @@
       </a>
 
       <!-- Search form -->
-        <form class="input-group w-auto my-auto d-none d-sm-flex">
+   
           <input
             autocomplete="off"
             type="search"
             placeholder="Search..."
             id="search-bar"
+            [(ngModel)]="textFind"
           />
-          <button type="submit" id="button-search">
+          <button type="submit" id="button-search
+          " (click)="findTwidits()"
+          data-bs-toggle="modal" data-bs-target="#findTwidits"
+          >
             <i class="bi bi-search" id="icons"></i>
           </button>
-        </form>
+    
       
     </div>
     <!-- Left elements -->
@@ -88,6 +92,37 @@
       <!-- <div class="modal-footer">
         <input class="form-control" type="file" accept="video/*, image/*" id="formFileMultiple" multiple>
       </div> -->
+    </div>
+  </div>
+</div>
+
+
+
+<div class="modal fade" id="findTwidits" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    
+
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Resultado de la busqueda</h1>
+        
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        
+      <div *ngFor="let item of twiddits">
+        <div class="card w-75" style="margin: 10px;">
+          <div class="card-body">
+            <h5 class="card-title">{{item.creationDate | date: 'dd/MM/yyyy'}}</h5>
+            <p class="card-text">{{item.text}}</p>
+            <p class="card-text">#Tags: {{item.tags}}</p>
+            <a  (click)="goInfoTwiddit(item._id, item.userId)"  data-bs-dismiss="modal" aria-label="Close" class="btn btn-danger">Ver</a>
+          </div>
+        </div>
+
+      </div>
+
+      </div>
     </div>
   </div>
 </div>
