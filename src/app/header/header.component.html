@@ -109,7 +109,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        
+        <h2>Twiddits:</h2>
       <div *ngFor="let item of twiddits">
         <div class="card w-75" style="margin: 10px;">
           <div class="card-body">
@@ -117,6 +117,20 @@
             <p class="card-text">{{item.text}}</p>
             <p class="card-text">#Tags: {{item.tags}}</p>
             <a  (click)="goInfoTwiddit(item._id, item.userId)"  data-bs-dismiss="modal" aria-label="Close" class="btn btn-danger">Ver</a>
+          </div>
+        </div>
+
+      </div>
+      <h2>Usuarios:</h2>
+
+      <div *ngFor="let item of users">
+        <div class="card w-75" style="margin: 10px;">
+          <div class="card-body">
+            <h5 class="card-title">{{item.username}}</h5>
+            <p class="card-text">{{item.description}}</p>
+            <p class="card-text"> Cumpleanos {{item.birthday | date: 'dd/MM/yyyy'}}</p>
+            <a  data-bs-dismiss="modal" (click)="follow(item.id)" aria-label="Close" style="margin: 10px" class="btn btn-danger"> Seguir</a>
+            <a  data-bs-dismiss="modal"  (click)="Unfollow(item.id)" aria-label="Close" style="margin: 10px" class="btn btn-warning">Dejar de Seguir</a>
           </div>
         </div>
 

@@ -22,4 +22,14 @@ export type register = {
     videoURL: string;
     tags: string[];
   }
+
+  export type User = {
+    id: string;
+    email: string;
+    description: string;
+    birthday: string;
+    profile_photo: string;
+    phone: string;
+    username:string;
+  }
   

@@ -3,7 +3,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Apollo, gql } from 'apollo-angular';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Twiddit } from '../models/register';
+import { Twiddit, User } from '../models/register';
 
 @Component({
   selector: 'app-header',
@@ -19,14 +19,15 @@ export class HeaderComponent {
   photo: string = "";
   loading = true;
   error: any;
-  twiddits:Twiddit[]= [];
-  usernameText:string = '';
+  twiddits: Twiddit[] = [];
+  users: User[] = [];
+  usernameText: string = '';
 
-  textFind:string = ''
+  textFind: string = ''
 
   checkoutForm = this.formBuilder.group({
     userId: "",
-    twiddit_text: ['', Validators.required ]
+    twiddit_text: ['', Validators.required]
   });
 
   form!: FormGroup;
@@ -36,10 +37,10 @@ export class HeaderComponent {
 
   ngOnInit() {
 
-    
+
     var userId = sessionStorage.getItem('userId');
 
-    this.checkoutForm.setValue({userId: userId, twiddit_text:''})
+    this.checkoutForm.setValue({ userId: userId, twiddit_text: '' })
 
     this.apollo.watchQuery({
       query: gql`
@@ -54,9 +55,9 @@ export class HeaderComponent {
         }
     }
     `,
-    variables: {
-      userId
-    }
+      variables: {
+        userId
+      }
     }).valueChanges.subscribe((result: any) => {
       this.rates = result.data
       this.loading = result.loading;
@@ -76,7 +77,7 @@ export class HeaderComponent {
     this.checkoutForm.reset();
   }
 
-  createTwiddit(userId: any, twiddit_text: any){
+  createTwiddit(userId: any, twiddit_text: any) {
     var date = new Date().toISOString();;
     console.log(date)
     this.apollo.mutate({
@@ -109,16 +110,18 @@ export class HeaderComponent {
     this.router.navigateByUrl('feed');
   }
 
-  logout(){
+  logout() {
     sessionStorage.clear()
     location.reload();
   }
 
 
 
-  findTwidits(){
+  findTwidits() {
 
     var text = this.textFind
+
+    this.findUsers() 
 
     this.apollo.watchQuery({
       query: gql`
@@ -139,30 +142,60 @@ export class HeaderComponent {
         }
       }
     `,
-    variables: {
-      text
-    }
+      variables: {
+        text
+      }
     }).valueChanges.subscribe((result: any) => {
       this.result = result.data
       this.twiddits = this.result.searchTwiddit
       console.log(this.twiddits)
     });
 
-    
+  }
+
+
+  findUsers() {
+
+    var text = this.textFind
+
+    this.apollo.watchQuery({
+      query: gql`
+      query Query($text: String!) {
+        searchUser(text:$text) {
+          id,
+            email,
+            description,
+            birthday,
+            profile_photo,
+            phone,
+            username
+          }
+        }
+    `,
+      variables: {
+        text
+      }
+    }).valueChanges.subscribe((result: any) => {
+      this.result = result.data
+      this.users = this.result.searchUser
+      console.log(this.users)
+    });
+
+
   }
 
 
 
-  goInfoTwiddit(twiddit_id: any, userName:any) {
+  goInfoTwiddit(twiddit_id: any, userName: any) {
     console.log(twiddit_id)
 
     this.router.navigateByUrl('feed/info-twiddit', { state: { id: twiddit_id, username: this.usernameText } });
   }
-  
 
-  name(userId: any){
-    
-    
+
+  name(userId: any) {
+
+
     this.apollo.watchQuery({
       query: gql`
       query Query($userId: Int!){
@@ -171,9 +204,9 @@ export class HeaderComponent {
         }
     }
     `,
-    variables: {
-      userId
-    }
+      variables: {
+        userId
+      }
     }).valueChanges.subscribe((result: any) => {
       this.rates = result.data
       this.usernameText = this.rates.viewProfile.username;
@@ -183,4 +216,77 @@ export class HeaderComponent {
 
 
   }
+
+
+
+  Unfollow(followedId: string){
+    var followerId = sessionStorage.getItem('userId');
+    console.log("data")
+    this.apollo.mutate({
+      mutation: gql`
+      mutation unfollow($followerId: Int!, $followedId: Int!){
+          unfollow(followerId: $followerId,
+            followedId: $followedId){
+              message
+        }
+        }
+      
+      `,
+      variables: {
+        followerId,
+        followedId
+      }
+    }).subscribe(
+      ({ data }) => {
+        console.log('got data', data);
+      },
+      error => {
+        console.log('there was an error sending the query', error);
+      },
+    );
+   // window.location.reload()
+  }
+
+
+  follow(followedId: string){
+    var followerId = sessionStorage.getItem('userId');
+    console.log("data")
+    this.apollo.mutate({
+      mutation: gql`
+      mutation createRelationship($followerId: Int!, $followedId: Int!){
+          createRelationship(relationship:{
+            followerId:$followerId,
+            followedId:$followedId, 
+            blocked: false
+          }){
+            message
+          }
+        }
+      
+      `,
+      variables: {
+        followerId,
+        followedId
+      }
+    }).subscribe(
+      ({ data }) => {
+        console.log('got data', data);
+      },
+      error => {
+        console.log('there was an error sending the query', error);
+      },
+    );
+ //   window.location.reload()
+  }
+
+
+
+
+
+
+
+
+
+
+
 }
