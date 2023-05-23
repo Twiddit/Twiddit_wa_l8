@@ -6,13 +6,8 @@
   <div class="card w-25">
     <div class="card-header bg-transparent">
       <div class="row">
-        <div class="col-10">
+        <div class="col-11">
           <h5 id="header">@{{twiddit.user}}</h5>
-        </div>
-        <div class="col">
-          <a class="nav-link" type="button" data-bs-toggle="modal" data-bs-target="#retwiddit" (click)="retwiddit(twiddit.id, twiddits)" title="Retwiddiar!">
-            <span><i class="bi bi-recycle" id="icons-header"></i></span>
-          </a>
         </div>
         <div class="col">
           <button class="nav-link" (click)="goInfoTwiddit(twiddit.id, twiddit.user)" title="View Twiddit!">
