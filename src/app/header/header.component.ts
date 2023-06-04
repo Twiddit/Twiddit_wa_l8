@@ -111,6 +111,23 @@ export class HeaderComponent {
   }
 
   logout() {
+    var token = {'accessToken': sessionStorage.getItem('token')};
+    //var token = sessionStorage.getItem('token');
+
+    this.apollo.watchQuery({
+      query: gql`
+      query Query($token: AuthorizationData!) {
+        logout(token: $token) {
+          statusCode
+          message
+        }
+      }
+    `,
+      variables: {
+        token
+      }
+    }).valueChanges.subscribe((result: any) => {
+    });
     sessionStorage.clear()
     location.reload();
   }
