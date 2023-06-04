@@ -1,0 +1,32 @@
+<app-header></app-header>
+
+<div *ngIf="loading" class="cssload-container">
+  <div class="cssload-speeding-wheel"></div>
+</div>
+
+<div *ngFor="let message of messages">
+  <div class="card w-25">
+    <div class="card-header bg-transparent">
+      <h4 id="header">User: {{message.userName}}</h4>
+    </div>
+    <div class="card-body">
+      <h6 class="card-title">Channel: {{message.channelName}}</h6>
+      <p class="card-text">{{message.content}}</p>
+    </div>
+    <div class="card-footer bg-transparent" id="footer">
+      <p class="card-text"><small class="text-muted">{{changeDateFormat(message.created_at)}}</small></p>
+    </div>
+  </div>
+</div>
+
+<div class="dropdown-center" id="dropdown">
+  <button class="btn btn-warning dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+    <b>Nº of Messages  </b>
+  </button>
+  <ul class="dropdown-menu">
+    <div *ngFor="let i of option">
+      <li><a class="dropdown-item" (click)="prueba(i)">{{i}}</a></li>
+    </div>
+  </ul>
+</div>
+

@@ -9,9 +9,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { AuthenticationComponent } from './authentication/authentication/authentication.component';
 import { HeaderModule } from './header/header.module';
 import { FeedModule } from './feed/feed.module';
-import { FeedComponent } from './feed/feed.component';
 import { GeneralInfoTwidditsComponent } from './feed/components/general-info-twiddits/general-info-twiddits.component';
 import { GeneralInfoTwidditsModule } from './feed/components/general-info-twiddits/general-info-twiddits.module';
+import { UnoaModule } from './unoa/unoa.module';
 
 
 @NgModule({
@@ -28,6 +28,7 @@ import { GeneralInfoTwidditsModule } from './feed/components/general-info-twiddi
     HttpClientModule,
     HeaderModule,
     FeedModule,
+    UnoaModule,
     NgbModule,
   ],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ] ,

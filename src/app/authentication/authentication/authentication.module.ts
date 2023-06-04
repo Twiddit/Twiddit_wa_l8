@@ -13,9 +13,7 @@ import { HeaderModule } from 'src/app/header/header.module';
 @NgModule({
   declarations: [
     AuthenticationComponent,
-    FeedComponent,
-    GeneralInfoTwidditsComponent,
-    HeaderComponent
+    FeedComponent
   ],
   imports: [
     CommonModule,

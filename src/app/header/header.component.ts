@@ -247,6 +247,10 @@ export class HeaderComponent {
    // window.location.reload()
   }
 
+  goUnoA() {
+    this.router.navigateByUrl('feed/interface');
+  }
+
 
   follow(followedId: string){
     var followerId = sessionStorage.getItem('userId');
@@ -276,6 +280,7 @@ export class HeaderComponent {
         console.log('there was an error sending the query', error);
       },
     );
+    
  //   window.location.reload()
   }
 
