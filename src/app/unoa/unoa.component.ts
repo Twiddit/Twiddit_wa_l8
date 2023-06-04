@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Apollo, gql } from 'apollo-angular';
 import { Router } from '@angular/router';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-unoa',
@@ -17,17 +18,28 @@ export class UnoaComponent {
   loading: any;
   rates: any | undefined;
   error: any;
+  form!: FormGroup;
 
-  constructor(private http: HttpClient, private apollo: Apollo, public router: Router) {
+
+  constructor(private http: HttpClient, private apollo: Apollo, public router: Router, private  fb: FormBuilder) {
+    this.form = this.fb.group({
+      email: [],      
+      number: []
+    });
   }
 
-  prueba(n: number) {
+  prueba(/* mail: string, n: number */) {
     this.messages = []
     /* this.http.get(this.url).subscribe(res => {
       this.getInfo(res)
+      
     }); */
-    var email = 'juan@unal.edu.co';
-    var number = n;
+
+    let email = this.form.get(['email'])?.value;
+    let number = this.form.get(['number'])?.value;
+
+    console.log(email, typeof(email))
+    console.log(number, typeof(number))
 
     this.loading = true;
 

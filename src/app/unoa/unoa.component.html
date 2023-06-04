@@ -1,5 +1,42 @@
 <app-header></app-header>
 
+<div class="row">
+  <div class="mx-auto col-10 col-md-8 col-lg-3">
+    <!-- Form -->
+    <form [formGroup]="form" class="form-example">
+      <h1>Interoperability</h1>
+      <p class="description">
+        Enter the email of the user and the number of messages that you want to see.
+      </p>
+      <!-- Input fields -->
+      <div class="form-group">
+        <label for="email" ><h5>Email</h5></label>
+        <input
+          type="text"
+          class="form-control username"
+          placeholder="Email..."
+          [formControlName]="'email'"
+        />
+      </div>
+      <br>
+      <div class="form-group">
+        <label for="number"><h5>Nº of Messages</h5></label>
+        <input
+          type="number"
+          class="form-control password"
+          placeholder="Number of messages..."
+          [formControlName]="'number'"
+        />
+      </div>
+
+      <button type="submit" id="boton" (click)="prueba()">
+        Search
+      </button>
+    </form>
+    <!-- Form end -->
+  </div>
+</div>
+
 <div *ngIf="loading" class="cssload-container">
   <div class="cssload-speeding-wheel"></div>
 </div>
@@ -19,7 +56,7 @@
   </div>
 </div>
 
-<div class="dropdown-center" id="dropdown">
+<!-- <div class="dropdown-center" id="dropdown">
   <button class="btn btn-warning dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
     <b>Nº of Messages  </b>
   </button>
@@ -28,5 +65,5 @@
       <li><a class="dropdown-item" (click)="prueba(i)">{{i}}</a></li>
     </div>
   </ul>
-</div>
+</div> -->
 

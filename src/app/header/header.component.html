@@ -17,11 +17,10 @@
             id="search-bar"
             [(ngModel)]="textFind"
           />
-          <button type="submit" id="button-search
-          " (click)="findTwidits()"
+          <button type="submit" id="add-twiddit" (click)="findTwidits()"
           data-bs-toggle="modal" data-bs-target="#findTwidits"
           >
-            <i class="bi bi-search" id="icons"></i>
+            <i class="bi bi-search" id="icons" id="icon-red"></i>
           </button>
     
       
@@ -44,7 +43,7 @@
 
       <li class="nav-item me-3 me-lg-1">
         <a class="nav-link">
-          <span><button id="add-twiddit" type="button" (click)="goUnoA()"><i class="bi bi-window-plus" id="icon-red"></i> XAPP</button></span>
+          <span><button id="add-twiddit" type="button" (click)="goUnoA()"><i class="bi bi-window-plus" id="icon-red"></i> Interoperability</button></span>
         </a>
       </li>
       

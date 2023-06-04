@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { UnoaComponent } from './unoa.component';
 import { HeaderModule } from '../header/header.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -11,7 +12,9 @@ import { HeaderModule } from '../header/header.module';
   ],
   imports: [
     CommonModule,
-    HeaderModule
+    HeaderModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   exports: [
     UnoaComponent
