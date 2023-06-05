@@ -22,8 +22,8 @@ FROM nginx:latest
 # Copy the build output to replace the default Nginx contents
 COPY --from=build /app/dist/twiddit-wa /usr/share/nginx/html
 
-# Expose port 80 to the outside world
-EXPOSE 80
+# Expose port 5005 to the outside world
+EXPOSE 5005
 
 # Start Nginx server
 CMD ["nginx", "-g", "daemon off;"]
