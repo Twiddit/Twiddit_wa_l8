@@ -67,7 +67,7 @@ export class AuthenticationComponent {
    let password = this.form.get(['password'])?.value;
    let username = this.form.get(['username'])?.value;
 
-   console.log(password+username)
+   //console.log(password+username)
     this.login(username,password)
     //location.reload();
   }
@@ -139,9 +139,9 @@ var password = user.password
 var phone = user.phone
 var profilePhoto = user.profilePhoto
 var username = user.username
-console.log(user)
+//console.log(user)
 
-console.log(username)
+//console.log(username)
 
 this.apollo.mutate({
   mutation: gql`
