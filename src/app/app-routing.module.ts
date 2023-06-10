@@ -6,7 +6,7 @@ import { InfoTwidditsComponent } from './feed/info-twiddits/info-twiddits.compon
 import { UnoaComponent } from './unoa/unoa.component';
 
 const routes: Routes = [
-  { path: '', component: AuthenticationComponent }, //Es AuthenticationComponent, solo probando
+  { path: '', component: FeedComponent }, //Es AuthenticationComponent, solo probando
   { path: 'feed', component: FeedComponent },
   { path: 'feed/info-twiddit', component: InfoTwidditsComponent, data: {id: '', username: ''}},
   { path: 'feed/interface', component: UnoaComponent }
