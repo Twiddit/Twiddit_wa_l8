@@ -73,7 +73,7 @@ export class HeaderComponent {
   }
 
   onSubmit() {
-    this.createTwiddit(this.checkoutForm.value.userId, this.checkoutForm.value.twiddit_text);
+    this.createTwiddit(1, this.checkoutForm.value.twiddit_text);
     this.checkoutForm.reset();
   }
 
