@@ -8,7 +8,7 @@ import { ApolloClientOptions, InMemoryCache } from '@apollo/client/core';
 
 
 //const uri = 'https://swapi-graphql.netlify.app/.netlify/functions/index';
-const uri = 'http://104.197.134.81:5000/graphql'; // <-- add the URL of the GraphQL server here
+const uri = 'http://twiddit-ag-svc.default.svc.cluster.local:5000/graphql'; // <-- add the URL of the GraphQL server here
 export function createApollo(httpLink: HttpLink): ApolloClientOptions<any> {
   return {
     link: httpLink.create({ uri }),
